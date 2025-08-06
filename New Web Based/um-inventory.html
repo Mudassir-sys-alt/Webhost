@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Maintenance Form - Loadshare Networks</title>
+    <link rel="stylesheet" href="um-inventory-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="Logo.png" alt="Loadshare Networks Logo" class="logo">
+                <h1 class="company-name">Bike Maintenance Form</h1>
+            </div>
+            <div class="user-section">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="user-name">Welcome, User</span>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="openInventory('bikes')">
+                        <i class="fas fa-bicycle"></i>
+                        Bikes Inventory
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-tools"></i>
+                        Maintenance Form
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" onclick="toggleUMDropdown()">
+                        <i class="fas fa-truck"></i>
+                        UM Vehicles
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu" id="um-dropdown">
+                        <li><a href="#" onclick="openUMVehicles()">View UM Vehicles</a></li>
+                        <li><a href="#" onclick="goBackToBikeMaintenanceForm()">Go Back to Bike Maintenance Form</a></li>
+                        <li><a href="#" onclick="umMaintenance()">UM Maintenance</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" onclick="toggleMastersDropdown()">
+                        <i class="fas fa-database"></i>
+                        Masters
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu" id="masters-dropdown">
+                        <li><a href="#" onclick="addNewCM()">Add New CM</a></li>
+                        <li><a href="#" onclick="addNewCity()">Add New City</a></li>
+                        <li><a href="#" onclick="addNewParts()">Add New Parts</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="form-container">
+            <div class="form-header">
+                <h2><i class="fas fa-tools"></i> Bike Maintenance Form</h2>
+                <p>Complete bike maintenance and repair details</p>
+            </div>
+
+            <form id="maintenanceForm" class="maintenance-form">
+                <!-- 1. Bike Arrival Details -->
+                <div class="form-section">
+                    <h3><i class="fas fa-calendar-alt"></i> 1. Bike Arrival Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="arrivalDateTime">Date & Time Received *</label>
+                            <input type="datetime-local" id="arrivalDateTime" name="arrivalDateTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceId">Service ID</label>
+                            <input type="text" id="serviceId" name="serviceId" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="expectedCompletion">Expected Completion Date *</label>
+                            <input type="date" id="expectedCompletion" name="expectedCompletion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="priorityLevel">Priority Level *</label>
+                            <select id="priorityLevel" name="priorityLevel" required>
+                                <option value="">Select Priority</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                        <div class="form-group ageing-tile">
+                            <label>Expected Duration</label>
+                            <div class="ageing-display" id="ageingDisplay">
+                                <span class="ageing-number" id="ageingNumber">-</span>
+                                <span class="ageing-label">days</span>
+                            </div>
+                        </div>
+                        <div class="form-group ageing-tile overdue-tile" id="overdueTile" style="display: none;">
+                            <label>Overdue Days</label>
+                            <div class="ageing-display" id="overdueDisplay">
+                                <span class="ageing-number" id="overdueNumber">-</span>
+                                <span class="ageing-label">days overdue</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <select id="city" name="city" required>
+                                <option value="">Select City</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Bike Information -->
+                <div class="form-section">
+                    <h3><i class="fas fa-bicycle"></i> 2. Bike Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="bikeRegNumber">Bike Registration Number *</label>
+                            <select id="bikeRegNumber" name="bikeRegNumber" required>
+                                <option value="">Select City First</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bikeBrandModel">Bike Brand/Model</label>
+                            <input type="text" id="bikeBrandModel" name="bikeBrandModel">
+                        </div>
+                        <div class="form-group">
+                            <label for="bikeType">Bike Type</label>
+                            <input type="text" id="bikeType" name="bikeType" value="EV" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="chassisNumber">Chassis Number</label>
+                            <input type="text" id="chassisNumber" name="chassisNumber" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="existingIssues">Existing Issues</label>
+                        <textarea id="existingIssues" name="existingIssues" rows="3" placeholder="Describe any existing issues with the bike..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 3. Rider/Customer Details -->
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> 3. Rider/Customer Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="riderName">Rider Name *</label>
+                            <input type="text" id="riderName" name="riderName" placeholder="Enter rider name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactNumber">Contact Number *</label>
+                            <input type="tel" id="contactNumber" name="contactNumber" placeholder="+91 98765 43210" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="requestId">Request ID *</label>
+                            <input type="text" id="requestId" name="requestId" placeholder="Enter Request ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cmName">CM (City Manager) *</label>
+                            <select id="cmName" name="cmName" required>
+                                <option value="">Select City First</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tlName">TL (Team Lead) *</label>
+                            <input type="text" id="tlName" name="tlName" placeholder="Enter Team Lead Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="riderAddress">Address</label>
+                            <input type="text" id="riderAddress" name="riderAddress" placeholder="Enter address">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Parts Damage & Repairs -->
+                <div class="form-section">
+                    <h3><i class="fas fa-wrench"></i> 4. Parts Damage & Repairs</h3>
+                    <div class="parts-table-container">
+                        <table id="partsTable" class="parts-table">
+                            <thead>
+                                <tr>
+                                    <th>Part Name</th>
+                                    <th>Damage Description</th>
+                                    <th>Repair Action</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="partsTableBody">
+                                <!-- Parts will be added here dynamically -->
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-secondary" onclick="addPartRow()">
+                            <i class="fas fa-plus"></i> Add Part
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. Expenses & Costs -->
+                <div class="form-section">
+                    <h3><i class="fas fa-rupee-sign"></i> 5. Expenses & Costs</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="laborCost">Labor Cost (₹) *</label>
+                            <input type="number" id="laborCost" name="laborCost" placeholder="0" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="partsCost">Parts Cost (₹) *</label>
+                            <input type="number" id="partsCost" name="partsCost" placeholder="0" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="totalCost">Total Cost (₹)</label>
+                            <input type="number" id="totalCost" name="totalCost" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentStatus">Payment Status *</label>
+                            <select id="paymentStatus" name="paymentStatus" required>
+                                <option value="">Select Status</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                                <option value="Partial">Partial</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Additional Notes -->
+                <div class="form-section">
+                    <h3><i class="fas fa-sticky-note"></i> 6. Additional Notes</h3>
+                    <div class="form-group full-width">
+                        <label for="mechanicComments">Mechanic Comments</label>
+                        <textarea id="mechanicComments" name="mechanicComments" rows="4" placeholder="Enter any additional comments from the mechanic..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="photoUpload">Attach Photos</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="photoUpload" name="photoUpload" multiple accept="image/*" class="file-input">
+                            <label for="photoUpload" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Choose files or drag them here</span>
+                            </label>
+                        </div>
+                        <div id="filePreview" class="file-preview"></div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Submit
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="saveDraft()">
+                        <i class="fas fa-save"></i> Save Draft
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="cancelForm()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Success/Error Modal -->
+    <div class="modal" id="messageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Success</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">Operation completed successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Masters Modals -->
+    <div class="modal" id="addCMModal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New City Manager</h3>
+                <button class="modal-close" onclick="closeMastersModal('addCMModal')">&times;</button>
+            </div>
+            <form id="addCMForm">
+                <div class="modal-body">
+                    <label for="newCMName">CM Name:</label>
+                    <input type="text" id="newCMName" name="newCMName" required>
+                    <label for="newCMCity">City:</label>
+                    <input type="text" id="newCMCity" name="newCMCity" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="closeMastersModal('addCMModal')">Cancel</button>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="addCityModal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New City</h3>
+                <button class="modal-close" onclick="closeMastersModal('addCityModal')">&times;</button>
+            </div>
+            <form id="addCityForm">
+                <div class="modal-body">
+                    <label for="newCityName">City Name:</label>
+                    <input type="text" id="newCityName" name="newCityName" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="closeMastersModal('addCityModal')">Cancel</button>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="addPartsModal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Parts</h3>
+                <button class="modal-close" onclick="closeMastersModal('addPartsModal')">&times;</button>
+            </div>
+            <form id="addPartsForm">
+                <div class="modal-body">
+                    <label for="newPartName">Part Name:</label>
+                    <input type="text" id="newPartName" name="newPartName" required>
+                    <label for="newPartNumber">Part Number:</label>
+                    <input type="text" id="newPartNumber" name="newPartNumber" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="closeMastersModal('addPartsModal')">Cancel</button>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="user-management.js"></script>
+    <script src="bike-data.js"></script>
+    <script src="um-inventory-script.js"></script>
+    <script>
+// Live date/time clock for UM Vehicles view
+function updateLiveDateTime() {
+    const dtElem = document.getElementById('live-datetime');
+    if (!dtElem) return;
+    const now = new Date();
+    const dateStr = now.toLocaleDateString();
+    const timeStr = now.toLocaleTimeString();
+    dtElem.textContent = `${dateStr} ${timeStr}`;
+}
+setInterval(updateLiveDateTime, 1000);
+document.addEventListener('DOMContentLoaded', updateLiveDateTime);
+</script>
+</body>
+</html> 

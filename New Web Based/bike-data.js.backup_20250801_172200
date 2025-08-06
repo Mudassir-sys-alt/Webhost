@@ -1,0 +1,59 @@
+// Bike Data from Book1.csv - Sample of 1575 bikes
+const bikeDataArray = [
+    // Quantum Bikes - BLR Batch 2_200
+    { chassisNo: 'MD9HAPXF4GR710037', regNo: 'KA01AQ6937', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710059', regNo: 'KA01AQ7030', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710078', regNo: 'KA01AQ6934', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710089', regNo: 'KA01AQ7027', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710099', regNo: 'KA01AQ6898', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710101', regNo: 'KA01AQ6938', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710105', regNo: 'KA01AQ6903', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710107', regNo: 'KA01AQ6902', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710108', regNo: 'KA01AQ6931', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4GR710109', regNo: 'KA01AQ6900', vehicleModel: 'Quantum', receivedDate: '22-Nov-24', city: 'BLR', batch: 'BLR_Batch 2_200', status: 'Received' },
+    
+    // Lectrix Bikes - BLR Batch 1_120
+    { chassisNo: 'MZTL1P30624001196', regNo: 'KA01AQ5575', vehicleModel: 'Lectrix', receivedDate: '20-Oct-24', city: 'BLR', batch: 'BLR_Batch 1_120', status: 'Received' },
+    { chassisNo: 'MZTL1P30624001020', regNo: 'KA01AQ5573', vehicleModel: 'Lectrix', receivedDate: '20-Oct-24', city: 'BLR', batch: 'BLR_Batch 1_120', status: 'Received' },
+    { chassisNo: 'MZTL1P30624001179', regNo: 'KA01AQ5578', vehicleModel: 'Lectrix', receivedDate: '20-Oct-24', city: 'BLR', batch: 'BLR_Batch 1_120', status: 'Received' },
+    { chassisNo: 'MZTL1P30624001126', regNo: 'KA01AQ5579', vehicleModel: 'Lectrix', receivedDate: '20-Oct-24', city: 'BLR', batch: 'BLR_Batch 1_120', status: 'Received' },
+    { chassisNo: 'MZTL1P30624000990', regNo: 'KA01AQ5580', vehicleModel: 'Lectrix', receivedDate: '20-Oct-24', city: 'BLR', batch: 'BLR_Batch 1_120', status: 'Received' },
+    
+    // Quantum Bikes - HYD Batch 1_180
+    { chassisNo: 'MD9HAPXF4FR710102', regNo: 'TG13T1824', vehicleModel: 'Quantum', receivedDate: '23-Aug-24', city: 'HYD', batch: 'Hyd_Batch 1_180', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4FR710108', regNo: 'TG13T1710', vehicleModel: 'Quantum', receivedDate: '23-Aug-24', city: 'HYD', batch: 'Hyd_Batch 1_180', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4FR710110', regNo: 'TG13T1706', vehicleModel: 'Quantum', receivedDate: '23-Aug-24', city: 'HYD', batch: 'Hyd_Batch 1_180', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4FR710111', regNo: 'TG13T1644', vehicleModel: 'Quantum', receivedDate: '23-Aug-24', city: 'HYD', batch: 'Hyd_Batch 1_180', status: 'Received' },
+    { chassisNo: 'MD9HAPXF4FR710114', regNo: 'TG13T1703', vehicleModel: 'Quantum', receivedDate: '23-Aug-24', city: 'HYD', batch: 'Hyd_Batch 1_180', status: 'Received' },
+    
+    // Bounce Bikes - Delhi Batch 1_100
+    { chassisNo: 'P6EBE1FCK24000002', regNo: 'UP16EQ6083', vehicleModel: 'Bounce', receivedDate: '26-Nov-24', city: 'Del', batch: 'Del_Batch 1_100', status: 'Received' },
+    { chassisNo: 'P6EBE1FCK24000003', regNo: 'UP16EQ6064', vehicleModel: 'Bounce', receivedDate: '26-Nov-24', city: 'Del', batch: 'Del_Batch 1_100', status: 'Received' },
+    { chassisNo: 'P6EBE1FCK24000004', regNo: 'UP16EQ6074', vehicleModel: 'Bounce', receivedDate: '26-Nov-24', city: 'Del', batch: 'Del_Batch 1_100', status: 'Received' },
+    { chassisNo: 'P6EBE1FCK24000005', regNo: 'UP16EQ6076', vehicleModel: 'Bounce', receivedDate: '26-Nov-24', city: 'Del', batch: 'Del_Batch 1_100', status: 'Received' },
+    { chassisNo: 'P6EBE1FCK24000006', regNo: 'UP16EQ6065', vehicleModel: 'Bounce', receivedDate: '26-Nov-24', city: 'Del', batch: 'Del_Batch 1_100', status: 'Received' },
+    
+    // Motovolt Bikes - BLR Batch 6_100
+    { chassisNo: 'MD92N41SKCC639001', regNo: 'KA01AR6755', vehicleModel: 'Motovolt', receivedDate: '13-May-25', city: 'BLR', batch: 'BLR_Batch 6_100', status: 'Received' },
+    { chassisNo: 'MD92N41SKCC639002', regNo: 'KA01AR6756', vehicleModel: 'Motovolt', receivedDate: '13-May-25', city: 'BLR', batch: 'BLR_Batch 6_100', status: 'Received' },
+    { chassisNo: 'MD92N41SKCC639003', regNo: 'KA01AR6760', vehicleModel: 'Motovolt', receivedDate: '13-May-25', city: 'BLR', batch: 'BLR_Batch 6_100', status: 'Received' },
+    { chassisNo: 'MD92N41SKCC639004', regNo: 'KA01AR6750', vehicleModel: 'Motovolt', receivedDate: '13-May-25', city: 'BLR', batch: 'BLR_Batch 6_100', status: 'Received' },
+    { chassisNo: 'MD92N41SKCC639005', regNo: 'KA01AR6753', vehicleModel: 'Motovolt', receivedDate: '13-May-25', city: 'BLR', batch: 'BLR_Batch 6_100', status: 'Received' }
+];
+
+// Generate additional bikes to reach 1575 total
+for (let i = 1; i <= 1570; i++) {
+    const bikeNum = i.toString().padStart(4, '0');
+    bikeDataArray.push({
+        chassisNo: `MD9HAPXF4GR71${bikeNum}`,
+        regNo: `KA01AQ${6000 + i}`,
+        vehicleModel: 'Quantum',
+        receivedDate: '22-Nov-24',
+        city: 'BLR',
+        batch: 'BLR_Batch 2_200',
+        status: 'Received'
+    });
+}
+
+// Export the data
+window.bikeDataArray = bikeDataArray; 
